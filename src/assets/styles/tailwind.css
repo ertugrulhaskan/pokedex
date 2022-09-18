@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-body text-zinc-900;
+  }
+  h1 {
+    @apply text-3xl font-semibold leading-9;
+  }
+}
