@@ -21,4 +21,7 @@
   .btn-icon svg {
     @apply text-xl;
   }
+
+  .card {
+  }
 }

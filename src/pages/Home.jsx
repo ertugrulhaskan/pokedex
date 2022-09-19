@@ -5,6 +5,8 @@ import Search from "../components/Search";
 // import PropTypes from 'prop-types'
 import { MdFilterList, MdFavorite, MdFavoriteBorder } from "react-icons/md";
 import IconButton from "../ui/IconButton";
+import CardSkeleton from "../components/card/CardSkeleton";
+import Footer from "../components/Footer";
 
 function Home() {
   return (
@@ -28,6 +30,15 @@ function Home() {
         </div>
       </nav>
       <Filters />
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3">
+        <CardSkeleton />
+        <CardSkeleton />
+        <CardSkeleton />
+        <CardSkeleton />
+        <CardSkeleton />
+        <CardSkeleton />
+      </div>
+      <Footer />
     </div>
   );
 }
