@@ -3,7 +3,7 @@ import React from "react";
 
 const IconButton = ({ children, text, icon }) => {
   const alignment =
-    icon === "left" ? "flex-row pl-2 pr-4" : "flex-row-reverse pl-4 pr-2";
+    icon === "left" ? "flex-row pl-3 pr-4" : "flex-row-reverse pl-4 pr-3";
   return (
     <button className={`btn-icon flex items-center ${alignment}`}>
       {children}
