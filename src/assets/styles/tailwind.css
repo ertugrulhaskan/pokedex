@@ -9,4 +9,16 @@
   h1 {
     @apply text-3xl font-semibold leading-9;
   }
+  input[type="text"] {
+    @apply outline-none;
+  }
+}
+
+@layer components {
+  .btn-icon {
+    @apply h-10 rounded-full border border-zinc-100 bg-zinc-50 py-1 text-base;
+  }
+  .btn-icon svg {
+    @apply text-xl;
+  }
 }

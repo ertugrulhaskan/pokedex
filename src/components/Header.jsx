@@ -3,7 +3,7 @@ import React from "react";
 
 const Header = () => {
   return (
-    <header className="py-4">
+    <header className="py-6">
       <h1>
         What Pokemon <br />
         are you looking for?
