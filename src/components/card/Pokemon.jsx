@@ -1,22 +1,27 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { ThemeContext } from "../../contexts/ThemeContext";
 import CardSkeleton from "./CardSkeleton";
 
 const Pokemon = ({ pokemon }) => {
+  const { theme, getTheme } = useContext(ThemeContext);
+
   const urlSplit = pokemon.url.split("/");
   const id = urlSplit[urlSplit.length - 2];
   const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
 
   const [loading, setLoading] = useState(true);
   const [visible, setVisible] = useState(false);
-  const [card, setCard] = useState(null);
 
   const cardRef = useRef();
+  const [card, setCard] = useState(null);
+  const [types, setTypes] = useState([]);
 
   const fetchPokemonDetails = async () => {
     try {
       const response = await fetch(`${pokemon.url}`);
       const pokemonDetails = await response.json();
       setCard(pokemonDetails);
+      setTypes(pokemonDetails.types.map((item) => item.type.name));
     } catch (error) {
       console.log(error);
     } finally {
@@ -55,10 +60,18 @@ const Pokemon = ({ pokemon }) => {
           />
         </div>
       ) : (
-        <div className="flex h-72 flex-col items-start overflow-hidden rounded-lg bg-gray-300 p-4">
+        <div
+          className={`flex h-72 flex-col items-start overflow-hidden rounded-lg p-4 ${getTheme(
+            types[0]
+          )}`}
+        >
           <div className="mb-5">
-            <div className="mb-3">{card.name.toUpperCase()}</div>
-            <div>{`#${("000" + id).slice(-3)}`}</div>
+            <div className="mb-1 text-2xl font-extrabold text-white">
+              {card.name.toUpperCase()}
+            </div>
+            <div className="text-xl font-semibold text-white opacity-50">{`#${(
+              "000" + id
+            ).slice(-3)}`}</div>
           </div>
           <div className="flex w-full flex-row justify-end">
             <div className="relative w-40">

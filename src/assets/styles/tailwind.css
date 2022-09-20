@@ -21,4 +21,61 @@
   .btn-icon svg {
     @apply text-xl;
   }
+
+  .green-gradient {
+    background: linear-gradient(
+      to right bottom,
+      theme(colors.green.light),
+      theme(colors.green.dark) 120%
+    );
+  }
+  .yellow-gradient {
+    background: linear-gradient(
+      to right bottom,
+      theme(colors.yellow.light),
+      theme(colors.yellow.dark) 120%
+    );
+  }
+  .red-gradient {
+    background: linear-gradient(
+      to right bottom,
+      theme(colors.red.light),
+      theme(colors.red.dark) 120%
+    );
+  }
+  .blue-gradient {
+    background: linear-gradient(
+      to right bottom,
+      theme(colors.blue.light),
+      theme(colors.blue.dark) 120%
+    );
+  }
+  .purple-gradient {
+    background: linear-gradient(
+      to right bottom,
+      theme(colors.purple.light),
+      theme(colors.purple.dark) 120%
+    );
+  }
+  .pink-gradient {
+    background: linear-gradient(
+      to right bottom,
+      theme(colors.pink.light),
+      theme(colors.pink.dark) 120%
+    );
+  }
+  .brown-gradient {
+    background: linear-gradient(
+      to right bottom,
+      theme(colors.brown.light),
+      theme(colors.brown.dark) 120%
+    );
+  }
+  .grey-gradient {
+    background: linear-gradient(
+      to right bottom,
+      theme(colors.grey.light),
+      theme(colors.grey.dark) 120%
+    );
+  }
 }

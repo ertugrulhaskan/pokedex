@@ -9,6 +9,7 @@ import IconButton from "../ui/IconButton";
 import { MdFilterList, MdFavorite } from "react-icons/md";
 import Footer from "../components/Footer";
 import Pokemon from "../components/card/Pokemon";
+import ThemeContextProvider, { ThemeContext } from "../contexts/ThemeContext";
 
 const Home = () => {
   const { filterTypeVisibility, toggleFilterType, loading, data } =
@@ -49,7 +50,9 @@ const Home = () => {
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3">
         {data &&
           data.map((pokemon) => (
-            <Pokemon pokemon={pokemon} key={pokemon.name} />
+            <ThemeContextProvider key={pokemon.name}>
+              <Pokemon pokemon={pokemon} />
+            </ThemeContextProvider>
           ))}
       </div>
 

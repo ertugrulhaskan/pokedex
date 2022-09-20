@@ -3,7 +3,7 @@ import React from "react";
 
 const CardSkeleton = ({ name, id }) => {
   return (
-    <div className="flex h-72 flex-col items-start overflow-hidden rounded-lg bg-gray-300 p-4">
+    <div className="grey-gradient flex h-72 flex-col items-start overflow-hidden rounded-lg p-4">
       <div className="mb-5">
         <div className="mb-3">{name}</div>
         <div>{id}</div>
