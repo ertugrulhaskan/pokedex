@@ -9,7 +9,7 @@ const Chip = ({ children, text }) => {
       className="flex cursor-pointer flex-row items-center justify-start rounded-full border border-gray-200 bg-white py-1 pl-2 pr-3 text-sm font-semibold"
       onClick={() => setClicked(true)}
     >
-      <div className="mr-1 w-4">{children}</div>
+      <div className="mr-2 w-4">{children}</div>
       {text}
       {clicked && (
         <button
