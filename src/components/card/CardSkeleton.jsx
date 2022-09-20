@@ -1,12 +1,12 @@
 import React from "react";
 // import PropTypes from 'prop-types'
 
-const CardSkeleton = (props) => {
+const CardSkeleton = ({ name, id }) => {
   return (
-    <div className="flex flex-col items-start overflow-hidden rounded-lg bg-gray-300 p-4">
+    <div className="flex h-72 flex-col items-start overflow-hidden rounded-lg bg-gray-300 p-4">
       <div className="mb-5">
-        <div className="mb-3 h-3 w-32 rounded-lg bg-gray-100 opacity-70"></div>
-        <div className="h-3 w-12 rounded-lg bg-gray-100"></div>
+        <div className="mb-3">{name}</div>
+        <div>{id}</div>
       </div>
       <div className="flex w-full flex-row justify-end">
         <div className="w-40">

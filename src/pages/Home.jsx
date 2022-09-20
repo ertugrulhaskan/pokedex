@@ -7,11 +7,12 @@ import Search from "../components/Search";
 import Filters from "../components/Filters";
 import IconButton from "../ui/IconButton";
 import { MdFilterList, MdFavorite } from "react-icons/md";
-import CardSkeleton from "../components/card/CardSkeleton";
 import Footer from "../components/Footer";
+import Pokemon from "../components/card/Pokemon";
 
 const Home = () => {
-  const { filterTypeVisibility, toggleFilterType } = useContext(AppContext);
+  const { filterTypeVisibility, toggleFilterType, loading, data } =
+    useContext(AppContext);
 
   return (
     <div className="home">
@@ -46,12 +47,10 @@ const Home = () => {
       {filterTypeVisibility && <Filters />}
 
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3">
-        <CardSkeleton />
-        <CardSkeleton />
-        <CardSkeleton />
-        <CardSkeleton />
-        <CardSkeleton />
-        <CardSkeleton />
+        {data &&
+          data.map((pokemon) => (
+            <Pokemon pokemon={pokemon} key={pokemon.name} />
+          ))}
       </div>
 
       <Footer />

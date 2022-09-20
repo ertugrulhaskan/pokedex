@@ -2,24 +2,19 @@ import React, { createContext, useEffect, useState } from "react";
 
 export const AppContext = createContext();
 
-const POKEMON_API = `https://pokeapi.co/api/v2`;
-
 const AppContextProvider = ({ children }) => {
-  const [filterTypeVisibility, setFilterTypeVisibility] = useState(false);
-  const [pokemonList, setPokemonList] = useState(null);
+  const POKEMON_API = `https://pokeapi.co/api/v2`;
 
-  const toggleFilterType = (e) => {
-    e.preventDefault();
-    setFilterTypeVisibility(!filterTypeVisibility);
-  };
+  const [filterTypeVisibility, setFilterTypeVisibility] = useState(false);
+  const [data, setData] = useState(null);
 
   const fetchPokemon = async () => {
     try {
       const response = await fetch(`${POKEMON_API}/pokemon?limit=151`);
       const data = await response.json();
-      setPokemonList(data.results);
-    } catch (err) {
-      console.log(err);
+      setData(data.results);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -27,8 +22,19 @@ const AppContextProvider = ({ children }) => {
     fetchPokemon();
   }, []);
 
+  const toggleFilterType = (e) => {
+    e.preventDefault();
+    setFilterTypeVisibility(!filterTypeVisibility);
+  };
+
   return (
-    <AppContext.Provider value={{ filterTypeVisibility, toggleFilterType }}>
+    <AppContext.Provider
+      value={{
+        filterTypeVisibility,
+        toggleFilterType,
+        data,
+      }}
+    >
       {children}
     </AppContext.Provider>
   );
