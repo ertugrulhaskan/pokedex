@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import CardSkeleton from "./CardSkeleton";
 
 const Pokemon = ({ pokemon }) => {
@@ -7,30 +7,53 @@ const Pokemon = ({ pokemon }) => {
   const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
 
   const [loading, setLoading] = useState(true);
+  const [visible, setVisible] = useState(false);
   const [card, setCard] = useState(null);
+
+  const cardRef = useRef();
 
   const fetchPokemonDetails = async () => {
     try {
       const response = await fetch(`${pokemon.url}`);
       const pokemonDetails = await response.json();
       setCard(pokemonDetails);
-      setLoading(false);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchPokemonDetails();
-  }, []);
+    if (!cardRef.current) {
+      return;
+    }
+    const observer = new IntersectionObserver((entries) => {
+      entries.map((entry) => {
+        setVisible(entry.isIntersecting);
+      });
+    });
+    observer.observe(cardRef.current);
+  }, [cardRef.current]);
+
+  useEffect(() => {
+    if (!visible) {
+      return;
+    }
+    if (loading) {
+      fetchPokemonDetails();
+    }
+  }, [visible]);
 
   return (
     <>
       {loading ? (
-        <CardSkeleton
-          name={pokemon.name.toUpperCase()}
-          id={`#${("000" + id).slice(-3)}`}
-        />
+        <div ref={cardRef}>
+          <CardSkeleton
+            name={pokemon.name.toUpperCase()}
+            id={`#${("000" + id).slice(-3)}`}
+          />
+        </div>
       ) : (
         <div className="flex h-72 flex-col items-start overflow-hidden rounded-lg bg-gray-300 p-4">
           <div className="mb-5">
