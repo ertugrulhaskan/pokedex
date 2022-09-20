@@ -69,7 +69,7 @@ const Pokemon = ({ pokemon }) => {
             <div className="text-2xl font-extrabold text-white">
               {card.name.toUpperCase()}
             </div>
-            <div className="text-xl font-extrabold text-white opacity-50">{`#${(
+            <div className="text-xl font-extrabold text-black opacity-50">{`#${(
               "000" + id
             ).slice(-3)}`}</div>
           </div>
