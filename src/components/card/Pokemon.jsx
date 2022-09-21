@@ -20,8 +20,11 @@ const Pokemon = ({ pokemon }) => {
     try {
       const response = await fetch(`${pokemon.url}`);
       const pokemonDetails = await response.json();
+      const typeArray = pokemonDetails.types.map((item) => item.type.name);
+
       setCard(pokemonDetails);
-      setTypes(pokemonDetails.types.map((item) => item.type.name));
+      setTypes(typeArray);
+      getTheme(typeArray[0]);
     } catch (error) {
       console.log(error);
     } finally {
@@ -61,9 +64,7 @@ const Pokemon = ({ pokemon }) => {
         </div>
       ) : (
         <div
-          className={`flex h-72 flex-col items-start overflow-hidden rounded-lg p-4 ${getTheme(
-            types[0]
-          )}`}
+          className={`flex h-72 flex-col items-start overflow-hidden rounded-lg p-4 ${theme}`}
         >
           <div className="mb-5">
             <div className="text-2xl font-extrabold text-white">
