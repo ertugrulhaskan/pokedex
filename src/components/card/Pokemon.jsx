@@ -84,7 +84,7 @@ const Pokemon = ({ pokemon }) => {
       ) : (
         <>
           <div
-            className={`flex h-72 flex-col items-start overflow-hidden rounded-lg p-4 ${theme}`}
+            className={`flex h-72 flex-col items-start overflow-hidden rounded-lg p-4 ${theme} cursor-pointer`}
             onClick={() => setModalbox(true)}
           >
             <div className="mb-5">

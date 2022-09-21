@@ -10,6 +10,11 @@ import {
 } from "react-icons/md";
 
 const PokemonCard = ({ pokemon, className }) => {
+  {
+    console.log(pokemon);
+  }
+  const typeArray = pokemon.types.map((item) => item.type.name);
+
   return (
     <div className={`max-w-xl rounded-3xl ${className}`}>
       <div className="relative h-80 bg-pokeball bg-50% bg-right-bottom bg-no-repeat">
@@ -26,15 +31,22 @@ const PokemonCard = ({ pokemon, className }) => {
             {pokemon.name}
           </h2>
           <div className="flex flex-row items-start">
-            <div className="mr-1 inline-block rounded-full bg-white bg-opacity-40 py-1 px-3 text-sm tracking-wide text-white">
-              Electric
-            </div>
+            {typeArray.map((type, idx) => {
+              return (
+                <div
+                  key={idx}
+                  className="mr-2 inline-block rounded-full bg-white bg-opacity-40 py-1 px-3 text-sm capitalize tracking-wide text-white"
+                >
+                  {type}
+                </div>
+              );
+            })}
           </div>
         </div>
         <div className="relative h-64">
           <img
             className="absolute -top-7 left-1/2 w-72 -translate-x-1/2"
-            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/42.png"
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`}
             alt=""
           />
         </div>
@@ -60,9 +72,10 @@ const PokemonCard = ({ pokemon, className }) => {
         </div>
         <div className="max-h-96 overflow-y-auto">
           <p className="font-semibold">
-            Its fangs easily puncture even thick animal hide. It loves to feast
-            on the blood of people and POKéMON. It flits about in darkness and
-            strikes from behind.
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s, when an unknown printer took a galley of type
+            and scrambled it to make a type specimen book.
           </p>
         </div>
       </div>
