@@ -75,6 +75,11 @@ const Pokemon = ({ pokemon }) => {
     }
   }, [visible]);
 
+  const closeModal = (e) => {
+    e.preventDefault();
+    setModalbox(false);
+  };
+
   return (
     <>
       {loading ? (
@@ -113,7 +118,11 @@ const Pokemon = ({ pokemon }) => {
             </div>
           </div>
           <Modal isOpen={modalbox}>
-            <PokemonCard pokemon={card} className={`${theme}`}></PokemonCard>
+            <PokemonCard
+              pokemon={card}
+              className={`${theme}`}
+              closeModal={closeModal}
+            ></PokemonCard>
           </Modal>
         </>
       )}

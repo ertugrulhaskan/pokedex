@@ -9,7 +9,7 @@ import {
   MdTableRows,
 } from "react-icons/md";
 
-const PokemonCard = ({ pokemon, className }) => {
+const PokemonCard = ({ pokemon, className, closeModal }) => {
   {
     console.log(pokemon);
   }
@@ -19,7 +19,10 @@ const PokemonCard = ({ pokemon, className }) => {
     <div className={`max-w-xl rounded-3xl ${className}`}>
       <div className="relative h-80 bg-pokeball bg-50% bg-custom bg-no-repeat">
         <div className="flex items-center justify-between px-5 py-5 text-2xl text-white">
-          <button className="opacity-70 transition-all hover:scale-125 hover:opacity-100">
+          <button
+            className="opacity-70 transition-all hover:scale-125 hover:opacity-100"
+            onClick={closeModal}
+          >
             <MdArrowBack />
           </button>
           <button className="transition-all hover:scale-125">
