@@ -9,6 +9,7 @@ const Pokemon = ({ pokemon }) => {
 
   const [loading, setLoading] = useState(true);
   const [visible, setVisible] = useState(false);
+  const [modalbox, setModalbox] = useState(false);
 
   const cardRef = useRef();
 
@@ -84,6 +85,7 @@ const Pokemon = ({ pokemon }) => {
         <>
           <div
             className={`flex h-72 flex-col items-start overflow-hidden rounded-lg p-4 ${theme}`}
+            onClick={() => setModalbox(true)}
           >
             <div className="mb-5">
               <div className="text-2xl font-extrabold capitalize text-white">
@@ -110,7 +112,7 @@ const Pokemon = ({ pokemon }) => {
               </div>
             </div>
           </div>
-          <Modal>
+          <Modal isOpen={modalbox}>
             <PokemonCard pokemon={card} className={`${theme}`}></PokemonCard>
           </Modal>
         </>
