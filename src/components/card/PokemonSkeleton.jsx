@@ -1,9 +1,9 @@
 import React from "react";
 // import PropTypes from 'prop-types'
 
-const CardSkeleton = ({ name, id }) => {
+const PokemonSkeleton = ({ name, id }) => {
   return (
-    <div className="grey-gradient flex h-72 flex-col items-start overflow-hidden rounded-lg p-4">
+    <div className="grey-gradient relative flex h-72 flex-col items-start overflow-hidden rounded-lg p-4">
       <div className="mb-5">
         <div className="text-2xl font-extrabold text-white">{name}</div>
         <div className="text-xl font-extrabold text-black opacity-50">{id}</div>
@@ -22,6 +22,6 @@ const CardSkeleton = ({ name, id }) => {
   );
 };
 
-// CardSkeleton.propTypes = {}
+// PokemonSkeleton.propTypes = {}
 
-export default CardSkeleton;
+export default PokemonSkeleton;
