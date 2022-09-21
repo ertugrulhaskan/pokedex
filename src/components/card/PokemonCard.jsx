@@ -17,7 +17,7 @@ const PokemonCard = ({ pokemon, className, closeModal }) => {
 
   return (
     <div className={`max-w-xl rounded-3xl ${className}`}>
-      <div className="relative h-80 bg-pokeball bg-50% bg-custom bg-no-repeat">
+      <div className="relative h-80 bg-pokeball bg-50% bg-right-bottom bg-no-repeat">
         <div className="flex items-center justify-between px-5 py-5 text-2xl text-white">
           <button
             className="opacity-70 transition-all hover:scale-125 hover:opacity-100"
