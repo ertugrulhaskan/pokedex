@@ -59,6 +59,9 @@ module.exports = {
       backgroundSize: {
         "50%": "50%",
       },
+      backgroundPosition: {
+        custom: "right 200%",
+      },
     },
   },
   plugins: [],

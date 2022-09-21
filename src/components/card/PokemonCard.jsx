@@ -17,7 +17,7 @@ const PokemonCard = ({ pokemon, className }) => {
 
   return (
     <div className={`max-w-xl rounded-3xl ${className}`}>
-      <div className="relative h-80 bg-pokeball bg-50% bg-right-bottom bg-no-repeat">
+      <div className="relative h-80 bg-pokeball bg-50% bg-custom bg-no-repeat">
         <div className="flex items-center justify-between px-5 py-5 text-2xl text-white">
           <button className="opacity-70 transition-all hover:scale-125 hover:opacity-100">
             <MdArrowBack />
@@ -27,7 +27,7 @@ const PokemonCard = ({ pokemon, className }) => {
           </button>
         </div>
         <div className="px-5">
-          <h2 className="mb-2 text-4xl font-semibold capitalize tracking-tight text-white">
+          <h2 className="mb-2 text-5xl font-semibold capitalize tracking-tight text-white">
             {pokemon.name}
           </h2>
           <div className="flex flex-row items-start">
@@ -45,7 +45,7 @@ const PokemonCard = ({ pokemon, className }) => {
         </div>
         <div className="relative h-64">
           <img
-            className="absolute -top-7 left-1/2 w-72 -translate-x-1/2"
+            className="absolute -top-16 left-1/2 w-80 -translate-x-1/2"
             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`}
             alt=""
           />
