@@ -53,6 +53,12 @@ module.exports = {
           dark: "#bcc4c4",
         },
       },
+      backgroundImage: {
+        pokeball: "url('../../assets/images/pokeball.svg')",
+      },
+      backgroundSize: {
+        "50%": "50%",
+      },
     },
   },
   plugins: [],

@@ -7,24 +7,43 @@ import PokemonSkeleton from "./PokemonSkeleton";
 const Pokemon = ({ pokemon }) => {
   const { theme, getTheme } = useContext(ThemeContext);
 
-  const urlSplit = pokemon.url.split("/");
-  const id = urlSplit[urlSplit.length - 2];
-  const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
-
   const [loading, setLoading] = useState(true);
   const [visible, setVisible] = useState(false);
 
   const cardRef = useRef();
+
+  const urlSplit = pokemon.url.split("/");
+  const id = urlSplit[urlSplit.length - 2];
+  const pokemonNumber = `000${id}`.slice(-3);
+  const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
+
   const [card, setCard] = useState(null);
   const [types, setTypes] = useState([]);
+
+  // name: string
+  // types: PokemonType[]
+  // imageUrl: string
+  // experience: number
+  // height: number
+  // weight: number
+  // moves: any[]
+  // abilities: string[]
+  // hp: number
+  // attack: number
+  // defense: number
+  // specialAttack: number
+  // specialDefense: number
+  // speed: number
+  // description: string
+  // evolutions: IChainLink[]
+  // isFavourite: boolean
 
   const fetchPokemonDetails = async () => {
     try {
       const response = await fetch(`${pokemon.url}`);
-      const pokemonDetails = await response.json();
-      const typeArray = pokemonDetails.types.map((item) => item.type.name);
-
-      setCard(pokemonDetails);
+      const data = await response.json();
+      const typeArray = data.types.map((item) => item.type.name);
+      setCard(data);
       setTypes(typeArray);
       getTheme(typeArray[0]);
     } catch (error) {
@@ -59,10 +78,7 @@ const Pokemon = ({ pokemon }) => {
     <>
       {loading ? (
         <div ref={cardRef}>
-          <PokemonSkeleton
-            name={pokemon.name.toUpperCase()}
-            id={`#${("000" + id).slice(-3)}`}
-          />
+          <PokemonSkeleton name={pokemon.name} id={pokemonNumber} />
         </div>
       ) : (
         <>
@@ -70,12 +86,12 @@ const Pokemon = ({ pokemon }) => {
             className={`flex h-72 flex-col items-start overflow-hidden rounded-lg p-4 ${theme}`}
           >
             <div className="mb-5">
-              <div className="text-2xl font-extrabold text-white">
-                {card.name.toUpperCase()}
+              <div className="text-2xl font-extrabold capitalize text-white">
+                {pokemon.name}
               </div>
-              <div className="text-xl font-extrabold text-black opacity-50">{`#${(
-                "000" + id
-              ).slice(-3)}`}</div>
+              <div className="text-xl font-extrabold text-black opacity-50">
+                #{pokemonNumber}
+              </div>
             </div>
             <div className="flex w-full flex-row justify-end">
               <div className="relative w-40">
@@ -89,13 +105,13 @@ const Pokemon = ({ pokemon }) => {
                   />
                 </svg>
                 <div className="absolute inset-0 h-auto w-52 -translate-x-12 -translate-y-6">
-                  <img src={imageUrl} alt={card.name} />
+                  <img src={imageUrl} alt={pokemon.name} />
                 </div>
               </div>
             </div>
           </div>
           <Modal>
-            <PokemonCard></PokemonCard>
+            <PokemonCard pokemon={card} className={`${theme}`}></PokemonCard>
           </Modal>
         </>
       )}

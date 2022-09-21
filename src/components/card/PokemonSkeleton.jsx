@@ -5,8 +5,12 @@ const PokemonSkeleton = ({ name, id }) => {
   return (
     <div className="grey-gradient relative flex h-72 flex-col items-start overflow-hidden rounded-lg p-4">
       <div className="mb-5">
-        <div className="text-2xl font-extrabold text-white">{name}</div>
-        <div className="text-xl font-extrabold text-black opacity-50">{id}</div>
+        <div className="text-2xl font-extrabold uppercase capitalize text-white">
+          {name}
+        </div>
+        <div className="text-xl font-extrabold text-black opacity-50">
+          #{id}
+        </div>
       </div>
       <div className="flex w-full flex-row justify-end">
         <div className="w-40">
