@@ -18,8 +18,13 @@ const Pokemon = ({ pokemon }) => {
   const pokemonNumber = `000${id}`.slice(-3);
   const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
 
-  const [card, setCard] = useState(null);
+  // const [card, setCard] = useState(null);
   const [types, setTypes] = useState([]);
+  const [description, setDescription] = useState(null);
+  const [experience, setExperince] = useState(null);
+  const [height, setHeight] = useState(null);
+  const [weight, setWeight] = useState(null);
+  const [abilities, setAbilities] = useState([]);
 
   // name: string
   // types: PokemonType[]
@@ -39,14 +44,34 @@ const Pokemon = ({ pokemon }) => {
   // evolutions: IChainLink[]
   // isFavourite: boolean
 
-  const fetchPokemonDetails = async () => {
+  const getSpecies = async (url) => {
+    const response = await fetch(`${url}`);
+    const data = await response.json();
+    const description = data.flavor_text_entries.find((text) => {
+      return text.language.name === "en" && text.version.name === "platinum";
+    });
+    setDescription(description.flavor_text);
+  };
+
+  const fetchPokemon = async () => {
     try {
       const response = await fetch(`${pokemon.url}`);
       const data = await response.json();
-      const typeArray = data.types.map((item) => item.type.name);
-      setCard(data);
-      setTypes(typeArray);
-      getTheme(typeArray[0]);
+      // setCard(data);
+      console.log(data);
+
+      const types = data.types.map((item) => item.type.name);
+      getTheme(types[0]);
+      setTypes(types);
+      getSpecies(data.species.url);
+      setExperince(data.base_experience);
+      setHeight(data.height * 10);
+      setWeight(data.weight * 0.1);
+
+      const abilities = data.abilities
+        .map((item) => ` ${item.ability.name}`)
+        .toString();
+      setAbilities(abilities);
     } catch (error) {
       console.log(error);
     } finally {
@@ -71,7 +96,7 @@ const Pokemon = ({ pokemon }) => {
       return;
     }
     if (loading) {
-      fetchPokemonDetails();
+      fetchPokemon();
     }
   }, [visible]);
 
@@ -119,7 +144,14 @@ const Pokemon = ({ pokemon }) => {
           </div>
           <Modal isOpen={modalbox}>
             <PokemonCard
-              pokemon={card}
+              name={pokemon.name}
+              imageUrl={imageUrl}
+              description={description}
+              types={types}
+              experience={experience}
+              height={height}
+              weight={weight}
+              abilities={abilities}
               className={`${theme}`}
               closeModal={closeModal}
             ></PokemonCard>
