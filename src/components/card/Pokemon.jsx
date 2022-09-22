@@ -100,6 +100,12 @@ const Pokemon = ({ pokemon }) => {
     }
   }, [visible]);
 
+  useEffect(() => {
+    document
+      .querySelector("body")
+      .classList.toggle("overflow-hidden", modalbox);
+  }, [modalbox]);
+
   const closeModal = (e) => {
     e.preventDefault();
     setModalbox(false);
