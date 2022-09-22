@@ -62,19 +62,19 @@ const PokemonCard = ({
       </div>
       <div className="max-h-[50vh] rounded-3xl bg-white px-5 pt-20 pb-5 md:max-h-[100%]">
         <div className="flex flex-row items-start justify-center text-center font-semibold uppercase text-zinc-500">
-          <div className="w-1/4 cursor-pointer border-b-2 border-zinc-500 p-2 hover:bg-zinc-100 md:w-28">
+          <div className="w-full cursor-pointer border-b-2 border-zinc-500 p-2 hover:bg-zinc-100">
             <MdSensors className="mx-auto text-2xl md:hidden" />
             <div className="hidden md:block">About</div>
           </div>
-          <div className="w-1/4 cursor-pointer p-2 hover:bg-zinc-100 md:w-28">
+          <div className="w-full cursor-pointer p-2 hover:bg-zinc-100">
             <MdOutlineTune className="mx-auto text-2xl md:hidden" />
             <div className="hidden md:block">Stats</div>
           </div>
-          <div className="w-1/4 cursor-pointer p-2 hover:bg-zinc-100 md:w-28">
+          <div className="w-full cursor-pointer p-2 hover:bg-zinc-100">
             <MdOutlineAutoAwesome className="mx-auto text-2xl md:hidden" />
             <div className="hidden md:block">Evolution</div>
           </div>
-          <div className="w-1/4 cursor-pointer p-2 hover:bg-zinc-100 md:w-28">
+          <div className="w-full cursor-pointer p-2 hover:bg-zinc-100">
             <MdTableRows className="mx-auto text-2xl md:hidden" />
             <div className="hidden md:block">Moves</div>
           </div>
