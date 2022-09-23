@@ -13,10 +13,10 @@ const Pokemon = ({ pokemon }) => {
 
   const cardRef = useRef();
 
-  const urlSplit = pokemon.url.split("/");
-  const id = urlSplit[urlSplit.length - 2];
-  const pokemonNumber = `000${id}`.slice(-3);
-  const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
+  const URLSplit = pokemon.url.split("/");
+  const ID = URLSplit[URLSplit.length - 2];
+  const POKEMON_NUMBER = `000${ID}`.slice(-3);
+  const IMAGE_URL = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${ID}.png`;
 
   // const [card, setCard] = useState(null);
   const [types, setTypes] = useState([]);
@@ -28,7 +28,7 @@ const Pokemon = ({ pokemon }) => {
 
   // name: string
   // types: PokemonType[]
-  // imageUrl: string
+  // IMAGE_URL: string
   // experience: number
   // height: number
   // weight: number
@@ -65,8 +65,10 @@ const Pokemon = ({ pokemon }) => {
       setTypes(types);
       getSpecies(data.species.url);
       setExperince(data.base_experience);
-      setHeight(data.height * 10);
-      setWeight(data.weight * 0.1);
+      const HEIGHT_CM = data.height * 10;
+      setHeight(HEIGHT_CM);
+      const ROUNDED_WEIGHT = data.weight * (0.1).toFixed(2);
+      setWeight(ROUNDED_WEIGHT);
 
       const abilities = data.abilities
         .map((item) => ` ${item.ability.name}`)
@@ -115,7 +117,7 @@ const Pokemon = ({ pokemon }) => {
     <>
       {loading ? (
         <div ref={cardRef}>
-          <PokemonSkeleton name={pokemon.name} id={pokemonNumber} />
+          <PokemonSkeleton name={pokemon.name} id={POKEMON_NUMBER} />
         </div>
       ) : (
         <>
@@ -128,7 +130,7 @@ const Pokemon = ({ pokemon }) => {
                 {pokemon.name}
               </div>
               <div className="text-xl font-extrabold text-black opacity-50">
-                #{pokemonNumber}
+                #{POKEMON_NUMBER}
               </div>
             </div>
             <div className="flex w-full flex-row justify-end">
@@ -143,7 +145,7 @@ const Pokemon = ({ pokemon }) => {
                   />
                 </svg>
                 <div className="absolute inset-0 h-auto w-52 -translate-x-12 -translate-y-6">
-                  <img src={imageUrl} alt={pokemon.name} />
+                  <img src={IMAGE_URL} alt={pokemon.name} />
                 </div>
               </div>
             </div>
@@ -151,7 +153,7 @@ const Pokemon = ({ pokemon }) => {
           <Modal isOpen={modalbox}>
             <PokemonCard
               name={pokemon.name}
-              imageUrl={imageUrl}
+              imageUrl={IMAGE_URL}
               description={description}
               types={types}
               experience={experience}
