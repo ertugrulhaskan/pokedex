@@ -9,19 +9,21 @@ const TabContent = ({ tabs }) => {
         {tabs.map((tab, idx) => {
           return (
             <div
-              className={`w-full cursor-pointer p-2 hover:bg-zinc-100 ${
-                tabID === idx && "border-b-2 border-zinc-500"
+              className={`p- w-full cursor-pointer ${
+                tabID === idx && "font-extrabold"
               }`}
               key={idx}
               onClick={() => setTabID(idx)}
             >
               {tab.icon}
-              <div className="hidden md:block">{tab.title}</div>
+              <div className="mb-3 hidden md:block">{tab.title}</div>
             </div>
           );
         })}
       </div>
-      <div className="py-5">{tabs[tabID].content}</div>
+      <div className="max-h-[33vh] overflow-auto pr-5">
+        <div className="py-5">{tabs[tabID].content}</div>
+      </div>
     </>
   );
 };

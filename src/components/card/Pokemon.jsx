@@ -123,6 +123,7 @@ const Pokemon = ({ pokemon }) => {
     }
   };
 
+  // Observing Content
   useEffect(() => {
     if (!cardRef.current) {
       return;
@@ -135,6 +136,7 @@ const Pokemon = ({ pokemon }) => {
     observer.observe(cardRef.current);
   }, [cardRef.current]);
 
+  // Lazy loading pokemon
   useEffect(() => {
     if (!visible) {
       return;

@@ -28,7 +28,7 @@ const PokemonCard = ({
   closeModal,
 }) => {
   return (
-    <div className={`max-w-lg rounded-3xl md:w-6/12 xl:w-4/12 ${className}`}>
+    <div className={`w-full max-w-md rounded-3xl ${className}`}>
       <div className="relative h-80 bg-pokeball bg-50% bg-right-bottom bg-no-repeat">
         <div className="flex items-center justify-between px-5 py-5 text-2xl text-white">
           <button
@@ -66,7 +66,7 @@ const PokemonCard = ({
           />
         </div>
       </div>
-      <div className="rounded-3xl bg-white px-5 pt-20 pb-10">
+      <div className="rounded-3xl bg-white pl-5 pr-2 pt-20 pb-5">
         <TabContent
           tabs={[
             {
