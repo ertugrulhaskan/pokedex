@@ -7,7 +7,12 @@ import {
   MdOutlineAutoAwesome,
   MdTableRows,
 } from "react-icons/md";
+
 import TabContent from "../TabContent";
+import PokemonAbout from "./PokemonAbout";
+import PokemanStats from "./PokemanStats";
+// import PokemonEvolution from "./PokemonEvolution";
+// import PokemonMoves from "./PokemonMoves";
 
 const PokemonCard = ({
   name,
@@ -18,47 +23,14 @@ const PokemonCard = ({
   height,
   weight,
   abilities,
+  stats,
   className,
   closeModal,
 }) => {
-  const IconAbout = <MdSensors className="mx-auto text-2xl md:hidden" />;
-  const About = (
-    <>
-      <p className="pb-5">{description}</p>
-      <div className="flex flex-col justify-start">
-        <div className="mb-3 flex flex-row justify-start">
-          <h3 className="w-40 text-zinc-600">Base Experience</h3>
-          <div className="font-semibold">{`${experience}xp`}</div>
-        </div>
-        <div className="mb-3 flex flex-row justify-start">
-          <h3 className="w-40 text-zinc-600">Height</h3>
-          <div className="font-semibold">{`${height}cm`}</div>
-        </div>
-        <div className="mb-3 flex flex-row justify-start">
-          <h3 className="w-40 text-zinc-600">Weight</h3>
-          <div className="font-semibold">{`${weight}kg`}</div>
-        </div>
-        <div className="flex flex-row justify-start">
-          <h3 className="w-40 text-zinc-600">Abilities</h3>
-          <div className="font-semibold">{abilities}</div>
-        </div>
-      </div>
-    </>
-  );
-
-  const IconStats = <MdOutlineTune className="mx-auto text-2xl md:hidden" />;
-  const Stats = <>Content Stats</>;
-
-  const IconEvolution = (
-    <MdOutlineAutoAwesome className="mx-auto text-2xl md:hidden" />
-  );
-  const Evolution = <>Content Evolution</>;
-
-  const IconMoves = <MdTableRows className="mx-auto text-2xl md:hidden" />;
-  const Moves = <>Content Moves</>;
-
   return (
-    <div className={`max-w-xl rounded-3xl ${className}`}>
+    <div
+      className={`w-11/12 max-w-lg rounded-3xl md:w-6/12 xl:w-4/12 ${className}`}
+    >
       <div className="relative h-80 bg-pokeball bg-50% bg-right-bottom bg-no-repeat">
         <div className="flex items-center justify-between px-5 py-5 text-2xl text-white">
           <button
@@ -101,12 +73,34 @@ const PokemonCard = ({
           tabs={[
             {
               title: "About",
-              icon: IconAbout,
-              content: About,
+              icon: <MdSensors className="mx-auto text-2xl md:hidden" />,
+              content: (
+                <PokemonAbout
+                  description={description}
+                  experience={experience}
+                  height={height}
+                  weight={weight}
+                  abilities={abilities}
+                />
+              ),
             },
-            { title: "Stats", icon: IconStats, content: Stats },
-            { title: "Evolution", icon: IconEvolution, content: Evolution },
-            { title: "Moves", icon: IconMoves, content: Moves },
+            {
+              title: "Stats",
+              icon: <MdOutlineTune className="mx-auto text-2xl md:hidden" />,
+              content: <PokemanStats stats={stats} theme={className} />,
+            },
+            // {
+            //   title: "Evolution",
+            //   icon: (
+            //     <MdOutlineAutoAwesome className="mx-auto text-2xl md:hidden" />
+            //   ),
+            //   content: <PokemonEvolution />,
+            // },
+            // {
+            //   title: "Moves",
+            //   icon: <MdTableRows className="mx-auto text-2xl md:hidden" />,
+            //   content: <PokemonMoves />,
+            // },
           ]}
         />
       </div>

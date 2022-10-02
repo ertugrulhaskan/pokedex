@@ -13,10 +13,13 @@ const Pokemon = ({ pokemon }) => {
 
   const cardRef = useRef();
 
+  const VERSION_GROUP_NAME = "lets-go-pikachu";
+
   const URLSplit = pokemon.url.split("/");
   const ID = URLSplit[URLSplit.length - 2];
   const POKEMON_NUMBER = `000${ID}`.slice(-3);
   const IMAGE_URL = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${ID}.png`;
+  const SPECIES_URL = `https://pokeapi.co/api/v2/pokemon-species/${ID}`;
 
   // const [card, setCard] = useState(null);
   const [types, setTypes] = useState([]);
@@ -25,6 +28,7 @@ const Pokemon = ({ pokemon }) => {
   const [height, setHeight] = useState(null);
   const [weight, setWeight] = useState(null);
   const [abilities, setAbilities] = useState([]);
+  const [stats, setStats] = useState([]);
 
   // name: string
   // types: PokemonType[]
@@ -48,9 +52,34 @@ const Pokemon = ({ pokemon }) => {
     const response = await fetch(`${url}`);
     const data = await response.json();
     const description = data.flavor_text_entries.find((text) => {
-      return text.language.name === "en" && text.version.name === "platinum";
+      // console.log(text.version.name);
+      return (
+        text.language.name === "en" && text.version.name === VERSION_GROUP_NAME
+      );
     });
     setDescription(description.flavor_text);
+  };
+
+  // const objectDeepSearch = (child) => {
+  //   child
+  // }
+
+  const getEvolution = async () => {
+    const response = await fetch(`${SPECIES_URL}`);
+    const data = await response.json();
+    const EVOLUTION_URL = data.evolution_chain.url;
+    const responseChain = await fetch(`${EVOLUTION_URL}`);
+    const dataChain = await responseChain.json();
+    // let evolvesList =[]
+    // for(child of dataChain.chain.evolves_to) {
+    //   objectDeepSearch(child)
+    // }
+    console.log(dataChain.chain);
+    // debugger;
+
+    // data.chain.species.name => EVOLUTATION 1
+    // data.chain.evolves_to[0].species.name => EVOLUTATION 2
+    // data.chain.evolves_to[0].evolves_to[0].species.name => EVOLUTATION 3
   };
 
   const fetchPokemon = async () => {
@@ -58,7 +87,7 @@ const Pokemon = ({ pokemon }) => {
       const response = await fetch(`${pokemon.url}`);
       const data = await response.json();
       // setCard(data);
-      console.log(data);
+      // console.log(data.moves);
 
       const types = data.types.map((item) => item.type.name);
       getTheme(types[0]);
@@ -73,7 +102,20 @@ const Pokemon = ({ pokemon }) => {
       const abilities = data.abilities
         .map((item) => ` ${item.ability.name}`)
         .toString();
+      // const abilities = data.abilities
+      //   .map((item) => item.ability.name)
+      //   .join(", ");
       setAbilities(abilities);
+
+      const stats = data.stats.map((stat) => {
+        return {
+          name: stat.stat.name,
+          stat: stat.base_stat,
+        };
+      });
+      setStats(stats);
+
+      getEvolution();
     } catch (error) {
       console.log(error);
     } finally {
@@ -160,6 +202,7 @@ const Pokemon = ({ pokemon }) => {
               height={height}
               weight={weight}
               abilities={abilities}
+              stats={stats}
               className={`${theme}`}
               closeModal={closeModal}
             ></PokemonCard>

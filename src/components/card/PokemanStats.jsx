@@ -1,0 +1,26 @@
+import React from "react";
+import ProgressBar from "../ProgressBar";
+
+const PokemanStats = ({ stats, theme }) => {
+  return (
+    <>
+      <div className="flex flex-col justify-start">
+        {stats.map((stat, idx) => {
+          let STAT_VALUE = stat.stat;
+          let STAT_VALUE_CALC = parseInt((STAT_VALUE / 150) * 100);
+          return (
+            <div className="mb-3 flex flex-row items-center" key={idx}>
+              <h3 className="w-4/12 shrink-0 text-zinc-600">{stat.name}</h3>
+              <div className="w-40 font-semibold">{STAT_VALUE}</div>
+              <div className="w-full">
+                <ProgressBar value={STAT_VALUE_CALC} theme={theme} />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </>
+  );
+};
+
+export default PokemanStats;
