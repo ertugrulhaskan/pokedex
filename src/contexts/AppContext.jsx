@@ -10,7 +10,7 @@ const AppContextProvider = ({ children }) => {
 
   const fetchPokemon = async () => {
     try {
-      const response = await fetch(`${POKEMON_API}/pokemon?limit=151`);
+      const response = await fetch(`${POKEMON_API}/pokemon?limit=150`);
       const data = await response.json();
       setData(data.results);
     } catch (error) {

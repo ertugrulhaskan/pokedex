@@ -28,9 +28,7 @@ const PokemonCard = ({
   closeModal,
 }) => {
   return (
-    <div
-      className={`w-11/12 max-w-lg rounded-3xl md:w-6/12 xl:w-4/12 ${className}`}
-    >
+    <div className={`max-w-lg rounded-3xl md:w-6/12 xl:w-4/12 ${className}`}>
       <div className="relative h-80 bg-pokeball bg-50% bg-right-bottom bg-no-repeat">
         <div className="flex items-center justify-between px-5 py-5 text-2xl text-white">
           <button

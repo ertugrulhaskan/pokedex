@@ -96,7 +96,7 @@ const Pokemon = ({ pokemon }) => {
       setExperince(data.base_experience);
       const HEIGHT_CM = data.height * 10;
       setHeight(HEIGHT_CM);
-      const ROUNDED_WEIGHT = data.weight * (0.1).toFixed(2);
+      const ROUNDED_WEIGHT = parseFloat((data.weight * 0.1).toFixed(2));
       setWeight(ROUNDED_WEIGHT);
 
       const abilities = data.abilities
