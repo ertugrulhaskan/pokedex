@@ -47,7 +47,13 @@ const Pokemon = ({ pokemon }) => {
   // evolutions: IChainLink[]
   // isFavourite: boolean
 
-  const getEvolution = () => {};
+  const getEvolution = (data) => {
+    console.log(data.chain.species.name);
+    console.log(data.chain.evolves_to[0].species.name);
+    console.log(data.chain.evolves_to[0].evolves_to[0].species.name);
+    console.log(data.chain);
+    // console.log(data);
+  };
 
   const getSpecies = (data) => {
     const description = data.flavor_text_entries.find((text) => {
@@ -86,18 +92,12 @@ const Pokemon = ({ pokemon }) => {
   };
 
   const fetchEvolution = async () => {
-    const response = await fetch(`${SPECIES_URL}`);
+    const speciesResponse = await fetch(`${SPECIES_URL}`);
+    const speciesData = await speciesResponse.json();
+    const EVOLUTION_URL = speciesData.evolution_chain.url;
+    const response = await fetch(`${EVOLUTION_URL}`);
     const data = await response.json();
-    const EVOLUTION_URL = data.evolution_chain.url;
-    const responseChain = await fetch(`${EVOLUTION_URL}`);
-    const dataChain = await responseChain.json();
-
-    // data.chain.species.name => EVOLUTATION 1
-    // data.chain.evolves_to[0].species.name => EVOLUTATION 2
-    // data.chain.evolves_to[0].evolves_to[0].species.name => EVOLUTATION 3
-
-    // console.log(dataChain.chain);
-    return dataChain;
+    return data;
   };
 
   const fetchSpecies = async () => {
@@ -116,13 +116,14 @@ const Pokemon = ({ pokemon }) => {
     }
   };
 
-  const fetchAll = () => {
-    const promises = [fetchPokemon(), fetchSpecies()];
+  const fetchAll = async () => {
+    const promises = [fetchPokemon(), fetchSpecies(), fetchEvolution()];
     try {
-      Promise.all(promises).then((results) => {
+      await Promise.all(promises).then((results) => {
         getPokemon(results[0]);
         getSpecies(results[1]);
-        console.log(results);
+        getEvolution(results[2]);
+        // console.log(results);
       });
       setLoading(false);
     } catch (error) {
