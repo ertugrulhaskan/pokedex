@@ -21,7 +21,6 @@ const Pokemon = ({ pokemon }) => {
   const IMAGE_URL = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${ID}.png`;
   const SPECIES_URL = `https://pokeapi.co/api/v2/pokemon-species/${ID}`;
 
-  // const [card, setCard] = useState(null);
   const [types, setTypes] = useState([]);
   const [description, setDescription] = useState(null);
   const [experience, setExperince] = useState(null);
@@ -48,11 +47,10 @@ const Pokemon = ({ pokemon }) => {
   // evolutions: IChainLink[]
   // isFavourite: boolean
 
-  const getSpecies = async (url) => {
-    const response = await fetch(`${url}`);
-    const data = await response.json();
+  const getEvolution = () => {};
+
+  const getSpecies = (data) => {
     const description = data.flavor_text_entries.find((text) => {
-      // console.log(text.version.name);
       return (
         text.language.name === "en" && text.version.name === VERSION_GROUP_NAME
       );
@@ -60,66 +58,75 @@ const Pokemon = ({ pokemon }) => {
     setDescription(description.flavor_text);
   };
 
-  // const objectDeepSearch = (child) => {
-  //   child
-  // }
+  const getPokemon = (data) => {
+    const types = data.types.map((item) => item.type.name);
+    getTheme(types[0]);
+    setTypes(types);
+    setExperince(data.base_experience);
+    const HEIGHT_CM = data.height * 10;
+    setHeight(HEIGHT_CM);
+    const ROUNDED_WEIGHT = parseFloat((data.weight * 0.1).toFixed(2));
+    setWeight(ROUNDED_WEIGHT);
 
-  const getEvolution = async () => {
+    const abilities = data.abilities
+      .map((item) => ` ${item.ability.name}`)
+      .toString();
+    // const abilities = data.abilities
+    //   .map((item) => item.ability.name)
+    //   .join(", ");
+    setAbilities(abilities);
+
+    const stats = data.stats.map((stat) => {
+      return {
+        name: stat.stat.name,
+        stat: stat.base_stat,
+      };
+    });
+    setStats(stats);
+  };
+
+  const fetchEvolution = async () => {
     const response = await fetch(`${SPECIES_URL}`);
     const data = await response.json();
     const EVOLUTION_URL = data.evolution_chain.url;
     const responseChain = await fetch(`${EVOLUTION_URL}`);
     const dataChain = await responseChain.json();
-    // let evolvesList =[]
-    // for(child of dataChain.chain.evolves_to) {
-    //   objectDeepSearch(child)
-    // }
-    console.log(dataChain.chain);
-    // debugger;
 
     // data.chain.species.name => EVOLUTATION 1
     // data.chain.evolves_to[0].species.name => EVOLUTATION 2
     // data.chain.evolves_to[0].evolves_to[0].species.name => EVOLUTATION 3
+
+    // console.log(dataChain.chain);
+    return dataChain;
+  };
+
+  const fetchSpecies = async () => {
+    const response = await fetch(`${SPECIES_URL}`);
+    const data = await response.json();
+    return data;
   };
 
   const fetchPokemon = async () => {
     try {
       const response = await fetch(`${pokemon.url}`);
       const data = await response.json();
-      // setCard(data);
-      // console.log(data.moves);
-
-      const types = data.types.map((item) => item.type.name);
-      getTheme(types[0]);
-      setTypes(types);
-      getSpecies(data.species.url);
-      setExperince(data.base_experience);
-      const HEIGHT_CM = data.height * 10;
-      setHeight(HEIGHT_CM);
-      const ROUNDED_WEIGHT = parseFloat((data.weight * 0.1).toFixed(2));
-      setWeight(ROUNDED_WEIGHT);
-
-      const abilities = data.abilities
-        .map((item) => ` ${item.ability.name}`)
-        .toString();
-      // const abilities = data.abilities
-      //   .map((item) => item.ability.name)
-      //   .join(", ");
-      setAbilities(abilities);
-
-      const stats = data.stats.map((stat) => {
-        return {
-          name: stat.stat.name,
-          stat: stat.base_stat,
-        };
-      });
-      setStats(stats);
-
-      getEvolution();
+      return data;
     } catch (error) {
       console.log(error);
-    } finally {
+    }
+  };
+
+  const fetchAll = () => {
+    const promises = [fetchPokemon(), fetchSpecies()];
+    try {
+      Promise.all(promises).then((results) => {
+        getPokemon(results[0]);
+        getSpecies(results[1]);
+        console.log(results);
+      });
       setLoading(false);
+    } catch (error) {
+      console.log("All promises error", error);
     }
   };
 
@@ -142,7 +149,7 @@ const Pokemon = ({ pokemon }) => {
       return;
     }
     if (loading) {
-      fetchPokemon();
+      fetchAll();
     }
   }, [visible]);
 

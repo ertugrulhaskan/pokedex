@@ -4,8 +4,8 @@ import {
   MdArrowBack,
   MdSensors,
   MdOutlineTune,
-  MdOutlineAutoAwesome,
-  MdTableRows,
+  // MdOutlineAutoAwesome,
+  // MdTableRows,
 } from "react-icons/md";
 
 import TabContent from "../TabContent";

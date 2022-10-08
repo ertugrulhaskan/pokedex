@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useContext } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 
 const Modal = ({ children, isOpen }) => {
