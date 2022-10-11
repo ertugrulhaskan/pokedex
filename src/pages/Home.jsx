@@ -12,7 +12,7 @@ import Pokemon from "../components/card/Pokemon";
 import ThemeContextProvider, { ThemeContext } from "../contexts/ThemeContext";
 
 const Home = () => {
-  const { filterTypeVisibility, toggleFilterType, loading, data } =
+  const { filterTypeVisibility, toggleFilterType, data, showFavorites } =
     useContext(AppContext);
 
   return (
@@ -27,7 +27,8 @@ const Home = () => {
             <IconButton
               text="My Favourites (0)"
               icon="left"
-              className="hover:bg-rose-400 hover:text-white"
+              className="hover:bg-rose-200 hover:text-pink-700"
+              onClick={showFavorites}
             >
               <MdFavorite className="mr-2" />
             </IconButton>

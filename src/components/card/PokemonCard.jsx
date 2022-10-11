@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import {
   MdFavoriteBorder,
+  MdFavorite,
   MdArrowBack,
   MdSensors,
   MdOutlineTune,
@@ -11,10 +12,13 @@ import {
 import TabContent from "../TabContent";
 import PokemonAbout from "./PokemonAbout";
 import PokemanStats from "./PokemanStats";
+import { AppContext } from "../../contexts/AppContext";
+import { useState } from "react";
 // import PokemonEvolution from "./PokemonEvolution";
 // import PokemonMoves from "./PokemonMoves";
 
 const PokemonCard = ({
+  id,
   name,
   imageUrl,
   description,
@@ -27,6 +31,10 @@ const PokemonCard = ({
   className,
   closeModal,
 }) => {
+  const { isExist, addFavorites, removeFavorites } = useContext(AppContext);
+
+  // const [favorites, setFavorites] = useState([]);
+
   return (
     <div className={`w-full max-w-md rounded-3xl ${className}`}>
       <div className="relative h-80 bg-pokeball bg-50% bg-right-bottom bg-no-repeat">
@@ -37,9 +45,21 @@ const PokemonCard = ({
           >
             <MdArrowBack />
           </button>
-          <button className="transition-all hover:scale-125">
-            <MdFavoriteBorder />
-          </button>
+          {!isExist(id) ? (
+            <button
+              className="transition-all hover:scale-125"
+              onClick={() => addFavorites(id)}
+            >
+              <MdFavoriteBorder />
+            </button>
+          ) : (
+            <button
+              className="transition-all hover:scale-125"
+              onClick={() => removeFavorites(id)}
+            >
+              <MdFavorite className="fill-pink-200" />
+            </button>
+          )}
         </div>
         <div className="px-5">
           <h2 className="mb-2 text-5xl font-semibold capitalize tracking-tight text-white">

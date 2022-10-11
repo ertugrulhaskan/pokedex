@@ -48,11 +48,11 @@ const Pokemon = ({ pokemon }) => {
   // isFavourite: boolean
 
   const getEvolution = (data) => {
-    console.log(data.chain.species.name);
-    console.log(data.chain.evolves_to[0].species.name);
-    console.log(data.chain.evolves_to[0].evolves_to[0].species.name);
-    console.log(data.chain);
-    // console.log(data);
+    console.log(data);
+    // console.log(data.chain.species.name);
+    // console.log(data.chain.evolves_to[0].species.name);
+    // console.log(data.chain.evolves_to[0].evolves_to[0].species.name);
+    // console.log(data.chain);
   };
 
   const getSpecies = (data) => {
@@ -122,7 +122,7 @@ const Pokemon = ({ pokemon }) => {
       await Promise.all(promises).then((results) => {
         getPokemon(results[0]);
         getSpecies(results[1]);
-        getEvolution(results[2]);
+        // TODO: getEvolution(results[2]);
         // console.log(results);
       });
       setLoading(false);
@@ -160,8 +160,7 @@ const Pokemon = ({ pokemon }) => {
       .classList.toggle("overflow-hidden", modalbox);
   }, [modalbox]);
 
-  const closeModal = (e) => {
-    e.preventDefault();
+  const closeModal = () => {
     setModalbox(false);
   };
 
@@ -204,6 +203,7 @@ const Pokemon = ({ pokemon }) => {
           </div>
           <Modal isOpen={modalbox}>
             <PokemonCard
+              id={parseInt(POKEMON_NUMBER - 1)}
               name={pokemon.name}
               imageUrl={IMAGE_URL}
               description={description}
