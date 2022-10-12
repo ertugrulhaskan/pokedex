@@ -15,7 +15,7 @@ const Pokemon = ({ name, url }) => {
   const ID = Number(URLSplit[URLSplit.length - 2]);
   const POKEMON_NUMBER = `000${ID}`.slice(-3);
   const IMAGE_URL = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${ID}.png`;
-  const SPECIES_URL = `https://pokeapi.co/api/v2/pokemon-species/${ID}`;
+  const SPECIES_URL = `https://pokeapi.co/api/v2/pokemon-species/${ID}/`;
 
   const [theme, setTheme] = useState("grey");
   const [loading, setLoading] = useState(true);
@@ -34,22 +34,7 @@ const Pokemon = ({ name, url }) => {
 
   const [species, setSpecies] = useState(null);
 
-  const getEvolution = (data) => {
-    console.log(data);
-    // console.log(data.chain.species.name);
-    // console.log(data.chain.evolves_to[0].species.name);
-    // console.log(data.chain.evolves_to[0].evolves_to[0].species.name);
-    // console.log(data.chain);
-  };
-
-  const getSpecies = (data) => {
-    const description = data.flavor_text_entries.find((text) => {
-      return (
-        text.language.name === "en" && text.version.name === VERSION_GROUP_NAME
-      );
-    });
-    setDescription(description.flavor_text);
-  };
+  const [evolution, setEvolution] = useState(null);
 
   const getPokemon = (data) => {
     const types = data.types.map((item) => item.type.name);
@@ -76,6 +61,23 @@ const Pokemon = ({ name, url }) => {
     setStats(stats);
   };
 
+  const getSpecies = (data) => {
+    const description = data.flavor_text_entries.find((text) => {
+      return (
+        text.language.name === "en" && text.version.name === VERSION_GROUP_NAME
+      );
+    });
+    setDescription(description.flavor_text);
+  };
+
+  const getEvolution = (data) => {
+    console.log(data);
+    // console.log(data.chain.species.name);
+    // console.log(data.chain.evolves_to[0].species.name);
+    // console.log(data.chain.evolves_to[0].evolves_to[0].species.name);
+    // console.log(data.chain);
+  };
+
   const fetchPokemon = async () => {
     let data = await Fetcher({ url });
     return data;
@@ -90,7 +92,8 @@ const Pokemon = ({ name, url }) => {
   const fetchEvolution = async () => {
     const EVOLUTION_URL = species.evolution_chain.url;
     let data = await Fetcher({ url: EVOLUTION_URL });
-    return data;
+    setEvolution(data);
+    // return data;
   };
 
   const fetchAll = async () => {

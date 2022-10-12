@@ -77,15 +77,15 @@ const PokemonCard = ({
             })}
           </div>
         </div>
-        <div className="relative h-64">
+        <div className="relative">
           <img
-            className="absolute -top-16 left-1/2 w-80 -translate-x-1/2"
+            className="absolute -top-10 right-2 w-64"
             src={imageUrl}
             alt={name}
           />
         </div>
       </div>
-      <div className="rounded-3xl bg-white pl-5 pr-2 pt-20 pb-5">
+      <div className="rounded-3xl bg-white pl-5 pr-2 pt-14 pb-5">
         <TabContent
           tabs={[
             {

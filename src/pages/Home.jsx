@@ -1,7 +1,6 @@
 // React
 import React, { Fragment, useContext } from "react";
 // Contexts
-import ThemeContextProvider from "../contexts/ThemeContext";
 import { AppContext } from "../contexts/AppContext";
 // Components
 import Header from "../components/Header";
@@ -21,9 +20,7 @@ const Home = () => {
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3">
         {data &&
           data.map((pokemon) => (
-            <ThemeContextProvider key={pokemon.name}>
-              <Pokemon name={pokemon.name} url={pokemon.url} />
-            </ThemeContextProvider>
+            <Pokemon name={pokemon.name} url={pokemon.url} key={pokemon.name} />
           ))}
       </div>
       <Footer />

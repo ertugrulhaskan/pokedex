@@ -18,7 +18,7 @@ const PokemanStats = ({ stats, className }) => {
               <div className="w-full">
                 <ProgressBar
                   value={STAT_VALUE_CALC}
-                  className={`${className}-gradient`}
+                  className={`${className}`}
                 />
               </div>
             </div>
