@@ -17,7 +17,9 @@ import { AppContext } from "../../contexts/AppContext";
 // import PokemonMoves from "./PokemonMoves";
 
 const PokemonCard = ({
-  id,
+  className,
+  closeModal,
+  index,
   name,
   imageUrl,
   description,
@@ -27,15 +29,13 @@ const PokemonCard = ({
   weight,
   abilities,
   stats,
-  className,
-  closeModal,
 }) => {
   const { isExist, addFavorites, removeFavorites } = useContext(AppContext);
 
   // const [favorites, setFavorites] = useState([]);
 
   return (
-    <div className={`w-full max-w-md rounded-3xl ${className}`}>
+    <div className={`w-full max-w-md rounded-3xl ${className}-gradient`}>
       <div className="relative h-80 bg-pokeball bg-50% bg-right-bottom bg-no-repeat">
         <div className="flex items-center justify-between px-5 py-5 text-2xl text-white">
           <button
@@ -44,17 +44,17 @@ const PokemonCard = ({
           >
             <MdArrowBack />
           </button>
-          {!isExist(id) ? (
+          {!isExist(index) ? (
             <button
               className="transition-all hover:scale-125"
-              onClick={() => addFavorites(id)}
+              onClick={() => addFavorites(index)}
             >
               <MdFavoriteBorder />
             </button>
           ) : (
             <button
               className="transition-all hover:scale-125"
-              onClick={() => removeFavorites(id)}
+              onClick={() => removeFavorites(index)}
             >
               <MdFavorite className="fill-white" />
             </button>
@@ -104,7 +104,7 @@ const PokemonCard = ({
             {
               title: "Stats",
               icon: <MdOutlineTune className="mx-auto text-2xl md:hidden" />,
-              content: <PokemanStats stats={stats} theme={className} />,
+              content: <PokemanStats stats={stats} className={className} />,
             },
             // {
             //   title: "Evolution",

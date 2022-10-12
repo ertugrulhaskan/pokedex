@@ -1,7 +1,7 @@
 import React from "react";
 import ProgressBar from "../ProgressBar";
 
-const PokemanStats = ({ stats, theme }) => {
+const PokemanStats = ({ stats, className }) => {
   return (
     <>
       <div className="flex flex-col justify-start">
@@ -16,7 +16,10 @@ const PokemanStats = ({ stats, theme }) => {
               <h3 className="w-6/12 shrink-0 text-zinc-600">{stat.name}</h3>
               <div className="w-10 shrink-0 font-semibold">{STAT_VALUE}</div>
               <div className="w-full">
-                <ProgressBar value={STAT_VALUE_CALC} theme={theme} />
+                <ProgressBar
+                  value={STAT_VALUE_CALC}
+                  className={`${className}-gradient`}
+                />
               </div>
             </div>
           );

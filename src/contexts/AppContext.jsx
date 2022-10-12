@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
+import { Fetcher } from "../helpers/Fetcher";
 
 export const AppContext = createContext();
 
@@ -12,13 +13,8 @@ const AppContextProvider = ({ children }) => {
   const [filteringTypes, setFilteringTypes] = useState([]);
 
   const fetchPokemon = async () => {
-    try {
-      const response = await fetch(`${POKEMON_API}/pokemon?limit=150`);
-      const data = await response.json();
-      setData(data.results);
-    } catch (error) {
-      console.log(error);
-    }
+    let data = await Fetcher({ url: `${POKEMON_API}/pokemon?limit=150` });
+    setData(data.results);
   };
 
   const fetchPokemonType = async (url) => {
