@@ -3,12 +3,14 @@ import React from "react";
 const Header = () => {
   return (
     <header className="py-6">
-      <h1 className="flex flex-row items-center">
+      <h1 className="flex flex-row items-center justify-between">
+        What Pokemon <br />
+        are you looking for?
         <a href="/">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 32 32"
-            className="mr-2 h-32 w-32"
+            className="h-32 w-32"
           >
             <path
               fill="#fe0505"
@@ -37,10 +39,6 @@ const Header = () => {
             />
           </svg>
         </a>
-        <div>
-          What Pokemon <br />
-          are you looking for?
-        </div>
       </h1>
     </header>
   );
