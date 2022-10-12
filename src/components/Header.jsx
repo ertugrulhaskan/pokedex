@@ -4,12 +4,12 @@ import React from "react";
 const Header = () => {
   return (
     <header className="py-6">
-      <h1 className="flex flex-row">
+      <h1 className="flex flex-row items-center">
         <a href="/">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 32 32"
-            className="mr-2 h-16 w-16"
+            className="mr-2 h-32 w-32"
           >
             <path
               fill="#fe0505"
