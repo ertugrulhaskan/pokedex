@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Chip from "./Chip";
 // import PropTypes from 'prop-types'
 import { PokemonTypes } from "../helpers/PokemonTypes";

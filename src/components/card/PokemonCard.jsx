@@ -13,7 +13,6 @@ import TabContent from "../TabContent";
 import PokemonAbout from "./PokemonAbout";
 import PokemanStats from "./PokemanStats";
 import { AppContext } from "../../contexts/AppContext";
-import { useState } from "react";
 // import PokemonEvolution from "./PokemonEvolution";
 // import PokemonMoves from "./PokemonMoves";
 
@@ -57,7 +56,7 @@ const PokemonCard = ({
               className="transition-all hover:scale-125"
               onClick={() => removeFavorites(id)}
             >
-              <MdFavorite className="fill-pink-200" />
+              <MdFavorite className="fill-white" />
             </button>
           )}
         </div>

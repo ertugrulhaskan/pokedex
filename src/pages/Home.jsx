@@ -12,8 +12,13 @@ import Pokemon from "../components/card/Pokemon";
 import ThemeContextProvider, { ThemeContext } from "../contexts/ThemeContext";
 
 const Home = () => {
-  const { filterTypeVisibility, toggleFilterType, data, showFavorites } =
-    useContext(AppContext);
+  const {
+    filterTypeVisibility,
+    data,
+    favorites,
+    showFavorites,
+    toggleFilterType,
+  } = useContext(AppContext);
 
   return (
     <div className="home">
@@ -25,7 +30,7 @@ const Home = () => {
         <div className="flex flex-row items-start">
           <div className="mr-4">
             <IconButton
-              text="My Favourites (0)"
+              text={`My favorites (${favorites.length})`}
               icon="left"
               className="hover:bg-rose-200 hover:text-pink-700"
               onClick={showFavorites}

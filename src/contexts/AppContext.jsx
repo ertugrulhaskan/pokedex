@@ -1,15 +1,15 @@
 import React, { createContext, useEffect, useState } from "react";
-import { useMemo } from "react";
 
 export const AppContext = createContext();
 
 const AppContextProvider = ({ children }) => {
   const POKEMON_API = `https://pokeapi.co/api/v2`;
 
-  const [filterTypeVisibility, setFilterTypeVisibility] = useState(false);
+  const [filterTypeVisibility, setFilterTypeVisibility] = useState(true);
   const [data, setData] = useState(null);
   const [favorites, setFavorites] = useState([]);
   const [filteringFavorites, setFilteringFavorites] = useState(false);
+  const [filteringTypes, setFilteringTypes] = useState([]);
 
   const fetchPokemon = async () => {
     try {
@@ -18,6 +18,29 @@ const AppContextProvider = ({ children }) => {
       setData(data.results);
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const fetchPokemonType = async (url) => {
+    const response = await fetch(`${url}`);
+    const data = await response.json();
+    return data.types[0].type.name;
+  };
+
+  const fetchPokemonTypes = async () => {
+    if (data) {
+      let promises = [];
+      const typesRequestURL = data.map((item) => item.url);
+      typesRequestURL.forEach((url) => {
+        promises = [...promises, fetchPokemonType(url)];
+      });
+      await Promise.all(promises).then((results) => {
+        const idxList = results
+          .map((item, idx) => filteringTypes.indexOf(item) !== -1 && idx)
+          .filter((item) => item !== false);
+        const newListFiltering = idxList.map((item) => data[item]);
+        setData(newListFiltering);
+      });
     }
   };
 
@@ -52,6 +75,14 @@ const AppContextProvider = ({ children }) => {
     setFilterTypeVisibility(!filterTypeVisibility);
   };
 
+  const filterType = (category) => {
+    if (!filteringTypes.includes(category)) {
+      setFilteringTypes((prevState) => {
+        return [...prevState, category];
+      });
+    }
+  };
+
   useEffect(() => {
     fetchPokemon();
     getFavorites();
@@ -73,6 +104,15 @@ const AppContextProvider = ({ children }) => {
     }
   }, [filteringFavorites]);
 
+  useEffect(() => {
+    fetchPokemon();
+    fetchPokemonTypes();
+  }, [filteringTypes]);
+
+  // useEffect(() => {
+  //   fetchPokemonTypes();
+  // }, [data]);
+
   return (
     <AppContext.Provider
       value={{
@@ -83,6 +123,8 @@ const AppContextProvider = ({ children }) => {
         addFavorites,
         removeFavorites,
         showFavorites,
+        favorites,
+        filterType,
       }}
     >
       {children}
