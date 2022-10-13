@@ -17,7 +17,7 @@ const Pokemon = ({ name, url }) => {
   const IMAGE_URL = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${ID}.png`;
   const SPECIES_URL = `https://pokeapi.co/api/v2/pokemon-species/${ID}/`;
 
-  const [theme, setTheme] = useState("grey");
+  const [theme, setTheme] = useState("grey-gradient");
   const [loading, setLoading] = useState(true);
   const [modalbox, setModalbox] = useState(false);
   const [visibleArea, setVisibleArea] = useState(false);
@@ -152,7 +152,7 @@ const Pokemon = ({ name, url }) => {
     <Fragment>
       {loading ? (
         <div ref={cardRef}>
-          <PokemonSkeleton name={name} id={POKEMON_NUMBER} />
+          <PokemonSkeleton className={theme} name={name} id={POKEMON_NUMBER} />
         </div>
       ) : (
         <Fragment>

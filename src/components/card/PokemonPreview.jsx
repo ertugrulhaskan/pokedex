@@ -3,7 +3,7 @@ import React from "react";
 const PokemonPreview = ({ className, name, id, src, setModalbox }) => {
   return (
     <div
-      className={`${className}-gradient flex h-72 cursor-pointer flex-col items-start overflow-hidden rounded-lg p-4`}
+      className={`${className} flex h-72 cursor-pointer flex-col items-start overflow-hidden rounded-lg p-4`}
       onClick={() => setModalbox(true)}
     >
       <div className="mb-5">

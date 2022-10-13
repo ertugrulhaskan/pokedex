@@ -1,6 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  safelist: [
+    {
+      pattern: /(green|yellow|red|blue|purple|pink|brown|grey)-gradient/,
+    },
+  ],
   theme: {
     extend: {
       fontFamily: {

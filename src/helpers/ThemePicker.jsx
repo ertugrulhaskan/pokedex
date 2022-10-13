@@ -3,36 +3,36 @@ export const ThemePicker = (type) => {
     case "bug":
     case "flying":
     case "grass":
-      return "green";
+      return "green-gradient";
 
     case "electric":
     case "fighting":
-      return "yellow";
+      return "yellow-gradient";
 
     case "fire":
     case "dragon":
-      return "red";
+      return "red-gradient";
 
     case "ice":
     case "normal":
     case "steel":
     case "water":
-      return "blue";
+      return "blue-gradient";
 
     case "poison":
     case "dark":
     case "ghost":
-      return "purple";
+      return "purple-gradient";
 
     case "psychic":
     case "fairy":
-      return "pink";
+      return "pink-gradient";
 
     case "ground":
     case "rock":
-      return "brown";
+      return "brown-gradient";
 
     default:
-      return "grey";
+      return "grey-gradient";
   }
 };

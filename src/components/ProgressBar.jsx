@@ -3,11 +3,11 @@ import React from "react";
 const ProgressBar = ({ value, className }) => {
   return (
     <div
-      className={`flex h-1 w-full flex-row items-center overflow-hidden rounded-full bg-zinc-100`}
+      className={`flex h-2 w-full flex-row items-center overflow-hidden rounded-full bg-zinc-100`}
     >
       <div
         style={{ width: `${value}%` }}
-        className={`h-1 ${className}-gradient rounded-full`}
+        className={`h-2 ${className} rounded-full`}
       ></div>
     </div>
   );
